@@ -1,6 +1,36 @@
 body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
+}
+
+video {
+    position: absolute;
+    left: 50px;
+}
+
+canvas {
+    position: absolute;
+    left: 50px;
+}
+
+#listaPresenca {
+    position: absolute;
+    right: 50px;
+}
+
+table {
+    background-color: #969696;
+}
+
+td, tr, table {
+    border: 1px solid #080808;
+}
+
+td, tr {
+    padding: 3px 5px;
+    background-color: #dddddd;
 }

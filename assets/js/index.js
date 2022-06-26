@@ -1,5 +1,21 @@
-const cam = document.getElementById('cam')
-var listaPresenca = []
+const cam = document.getElementById('cam');
+var listaPresenca = [];
+var alunos = [];
+
+function fazGet(url) {
+    let request = new XMLHttpRequest()
+    request.open("GET", url, false)
+    request.send()
+    return request.responseText
+}
+
+function main() {
+    let data = fazGet("https://localhost:7188/api/Cadastro/GetAllCadastro");
+    alunos = JSON.parse(data);
+    console.log(alunos);
+}
+
+main()
 
 const startVideo = () => {
     navigator.mediaDevices.enumerateDevices()
@@ -10,8 +26,8 @@ const startVideo = () => {
                     // Usar câmera específica pelo 'label':
                     // console.log(device);
 
-                    // if (device.label.includes('REDRAGON')) {
-                    if (device.label.includes('')) {
+                    if (device.label.includes('REDRAGON')) {
+                    // if (device.label.includes('')) {
                         navigator.getUserMedia(
                             { video: {
                                 deviceId: device.deviceId
@@ -28,18 +44,23 @@ const startVideo = () => {
 }
 
 const loadLabels = () => {
-    const labels = ['Leonardo Aoki', 'Luan Natan', 'Luiz Ciantela']
+    const labels = [];
+    console.log(alunos.length);
+    for (let i = 0; i < alunos.length; i++) {
+        labels[i] = alunos[i];
+    }
+    // const labels = ['Leonardo Aoki', 'Luan Natan', 'Luiz Ciantela']
     return Promise.all(labels.map(async label => {
         const descriptions = []
         for (let i = 1; i <= 3; i++) {
-            const img = await faceapi.fetchImage(`/assets/lib/face-api/labels/${label}/${i}.jpg`)
+            const img = await faceapi.fetchImage(`/assets/lib/face-api/labels/${label.matricula}/${label.imgPath}_${i}.jpg`)
             const detections = await faceapi
-                .detectSingleFace(img)
+                .detectSingleFace(img)  
                 .withFaceLandmarks()
                 .withFaceDescriptor()
             descriptions.push(detections.descriptor)
         }
-        return new faceapi.LabeledFaceDescriptors(label, descriptions)
+        return new faceapi.LabeledFaceDescriptors(label.nome, descriptions)
     }))
 }
 
@@ -113,11 +134,5 @@ function criaLinha(label, date) {
     let i = listaPresenca.length
     listaPresenca[i] = label
 
-    console.log(listaPresenca);
     return linha;
-}
-
-function enviaMatricula() {
-    let matricula = document.getElementById("matricula").value
-    console.log(matricula)
 }
