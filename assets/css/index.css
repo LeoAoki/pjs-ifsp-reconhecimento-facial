@@ -3,8 +3,12 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
+    background-color: #15141B;
+    color: #15141B;
     display: flex;
     align-items: center;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 video {
@@ -22,15 +26,18 @@ canvas {
     right: 50px;
 }
 
-table {
-    background-color: #969696;
+tr, th, td {
+    border-radius: 8px;
+    padding: 10px 20px;
 }
 
-td, tr, table {
-    border: 1px solid #080808;
+th {
+    border: 2px solid #5EF2BC;
+    font-size: 22px;
+    color: #FFD408;
+    background-color: #15141B;
 }
 
-td, tr {
-    padding: 3px 5px;
-    background-color: #dddddd;
+td {
+    background-color: #CAC6CC;
 }

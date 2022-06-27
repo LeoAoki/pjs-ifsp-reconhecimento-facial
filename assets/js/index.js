@@ -26,8 +26,8 @@ const startVideo = () => {
                     // Usar câmera específica pelo 'label':
                     // console.log(device);
 
-                    if (device.label.includes('REDRAGON')) {
-                    // if (device.label.includes('')) {
+                    // if (device.label.includes('REDRAGON')) {
+                    if (device.label.includes('')) {
                         navigator.getUserMedia(
                             { video: {
                                 deviceId: device.deviceId
@@ -107,7 +107,24 @@ cam.addEventListener('play', async () => {
                 `${label} (${parseInt(distance * 100, 10)})`
             ], box.bottomLeft).draw(canvas)
 
-            const date = Date(Date.UTC(2020, 1, 20, 8, 0, 0))
+            var dateNow = new Date();
+            var day = dateNow.getDate();
+            var month = (dateNow.getMonth() + 1);
+            var year = dateNow.getFullYear();
+            var hour = dateNow.getHours();
+            var min = dateNow.getMinutes();
+
+            if (day <= 9)
+                day = `0${day}`
+            if (month <= 9)
+                month = `0${month}`
+            if (hour <= 9)
+                hour = `0${hour}`
+            if (min <= 9)
+                min = `0${min}`
+
+            const date = `${day}/${month}/${year} ${hour}:${min}`
+            // const date = Date(Date.UTC(2020, 1, 20, 8, 0, 0))
 
             if (label != "unknown") {
                 if (!listaPresenca.includes(label)) {
